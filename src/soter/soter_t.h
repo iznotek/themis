@@ -44,18 +44,21 @@ soter_status_t soter_asym_cipher_cleanup(soter_asym_cipher_t* asym_cipher);
 soter_status_t soter_asym_ka_init(soter_asym_ka_t* asym_ka_ctx, soter_asym_ka_alg_t alg);
 soter_status_t soter_asym_ka_cleanup(soter_asym_ka_t* asym_ka_ctx);
 
+SOTER_PRIVATE_API
 soter_status_t soter_sign_init(soter_sign_ctx_t* ctx,
                                soter_sign_alg_t algId,
                                const void* private_key,
-                               size_t private_key_length,
+                               const size_t private_key_length,
                                const void* public_key,
-                               size_t public_key_length);
+                               const size_t public_key_length);
+
+SOTER_PRIVATE_API
 soter_status_t soter_verify_init(soter_sign_ctx_t* ctx,
                                  soter_sign_alg_t algId,
                                  const void* private_key,
-                                 size_t private_key_length,
+                                 const size_t private_key_length,
                                  const void* public_key,
-                                 size_t public_key_length);
+                                 const size_t public_key_length);
 
 /* Largest possible block size for supported hash functions (SHA-512) */
 #define HASH_MAX_BLOCK_SIZE 128

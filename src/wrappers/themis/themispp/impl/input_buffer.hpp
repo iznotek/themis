@@ -17,7 +17,12 @@
 #ifndef THEMISPP_IMPL_INPUT_BUFFER_HPP_
 #define THEMISPP_IMPL_INPUT_BUFFER_HPP_
 
+#ifndef _MSC_VER
 #include <cstring>
+#else
+#include <string>
+#endif
+
 #include <iterator>
 
 #include <themis/themis.h>

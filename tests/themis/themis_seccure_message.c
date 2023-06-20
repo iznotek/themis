@@ -1596,7 +1596,11 @@ static void uncompressed_ec(void)
     testsuite_fail_if((ec_private_key_length != 45) || (ec_public_key_length != 45),
                       "themis_gen_ec_key_pair generates compressed keys by default");
 
+#ifndef _MSC_VER
     setenv("THEMIS_GEN_EC_KEY_PAIR_UNCOMPRESSED", "1", 0);
+#else
+    _putenv("THEMIS_GEN_EC_KEY_PAIR_UNCOMPRESSED=1");
+#endif
     ec_private_key_length = sizeof(ec_private_key);
     ec_public_key_length = sizeof(ec_public_key);
     status = themis_gen_ec_key_pair(&ec_private_key[0],
@@ -1607,11 +1611,19 @@ static void uncompressed_ec(void)
         testsuite_fail_if(true, "themis_gen_ec_key_pair failed");
         return;
     }
+#ifndef _MSC_VER
     unsetenv("THEMIS_GEN_EC_KEY_PAIR_UNCOMPRESSED");
+#else
+    _putenv("THEMIS_GEN_EC_KEY_PAIR_UNCOMPRESSED=0");
+#endif
     testsuite_fail_if((ec_private_key_length != 45) || (ec_public_key_length != 77),
                       "setting THEMIS_GEN_EC_KEY_PAIR_UNCOMPRESSED to 1 produces uncompressed keys");
 
+#ifndef _MSC_VER
     setenv("THEMIS_GEN_EC_KEY_PAIR_UNCOMPRESSED", "yes", 0);
+#else
+    _putenv("THEMIS_GEN_EC_KEY_PAIR_UNCOMPRESSED=yes");
+#endif
     ec_private_key_length = sizeof(ec_private_key);
     ec_public_key_length = sizeof(ec_public_key);
     status = themis_gen_ec_key_pair(&ec_private_key[0],
@@ -1622,7 +1634,11 @@ static void uncompressed_ec(void)
         testsuite_fail_if(true, "themis_gen_ec_key_pair failed");
         return;
     }
+#ifndef _MSC_VER
     unsetenv("THEMIS_GEN_EC_KEY_PAIR_UNCOMPRESSED");
+#else
+    _putenv("THEMIS_GEN_EC_KEY_PAIR_UNCOMPRESSED=0");
+#endif
     testsuite_fail_if((ec_private_key_length != 45) || (ec_public_key_length != 45),
                       "setting THEMIS_GEN_EC_KEY_PAIR_UNCOMPRESSED to anything else results in compressed keys");
 }
